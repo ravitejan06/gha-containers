@@ -12,11 +12,17 @@ jobs:
     container: node:18-alpine
     environment: testing
     runs-on: ubuntu-latest
+    services:
+      mongodb:        ##Identifier
+       image: mongodb
+       env:
+        MONGO_INITDB_ROOT_USERNAME: root
+        MONGO_INITDB_ROOT_PASSWORD: example
     env:
-      MONGODB_CONNECTION_PROTOCOL: mongodb+srv
-      MONGODB_CLUSTER_ADDRESS: ${{secrets.MONGODB_CLUSTER_ADDRESS}}
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: mongodb      ## Service Identifier
+      MONGODB_USERNAME: root
+      MONGODB_PASSWORD: example
       PORT: 8080
     steps:
       - name: Get Code
